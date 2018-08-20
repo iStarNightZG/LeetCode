@@ -1,0 +1,39 @@
+/*******************************************************
+给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。
+
+你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。
+
+给定 nums = [2, 7, 11, 15], target = 9
+
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]
+********************************************************/
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+        map<int,int> NumStore;
+        vector<int> Answer;
+    
+        for(int i = 0;i < nums.size();i++)
+        {
+            //计算nums[i]的对应解，若map中不存在则存入nums[i]
+            //如果它存在，那我们已经找到了对应解，并立即将其返回。
+            int a = target - nums[i];
+             map<int,int>::iterator itor = NumStore.find(a);
+            if(itor == NumStore.end())
+            {
+                NumStore.insert(pair<int,int>(nums[i],i));
+            }
+            else
+            {
+                Answer.push_back(i);
+                Answer.push_back(itor->second);
+                return Answer;
+            }
+            
+        }
+        
+    }
+};
